@@ -1,33 +1,36 @@
-from words import choose_secret_word
-from new_game import letter_Checkir
-from new_game import secret_word_list
-from new_game import The_comparar
-from new_game import compar_len
-from myio import prompt_guess
-word = choose_secret_word()
+import words
+import new_game
+import myio
+
+word = words.choose_secret_word(["נמר","גמל","פיל","קוף"])
 counter=0
+round_limit=int(input("enter a limit"))
 game_allower=False
-while game_allower is False:
-    def game_init():
+compare = new_game.compar_len(word,)
+def game_init():
+    while game_allower is False:
         letters_already_guesst=[]
         secret_letters=[]
-        letter=prompt_guess()
-        lc=letter_Checkir(letter,letters_already_guesst)
+        letter=myio.prompt_guess()
+        lc=new_game.letter_Checkir(letter,letters_already_guesst)
         if lc==True:
             print("already in list")
             counter+=1
         else:
             letters_already_guesst.append(letter)
             counter+=1
-            tc=The_comparar(letter,word)
+            tc=new_game.The_comparar(letter,word)
             if tc==False:
                 print("You are wrong")
             elif tc==True:
                 print("good guess")
                 secret_letters.append(letter)
-        swl=secret_word_list()
-        compar_len(word,secret_letters)
-                        
+        swl=new_game.secret_word_list()
+        print(swl)
+        cl=new_game.compar_len(word,secret_letters)
+        cm=new_game.counter_monitor(counter,round_limit)
+game_init()
+            
 
 
 
