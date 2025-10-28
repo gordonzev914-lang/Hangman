@@ -44,6 +44,7 @@ def game_init(the_word=word,the_guess=display_list,limit=round_limit,counter=0,l
                 elif letter_within_a_word==True:
                     print("good guess")
                     the_guess.append(letter)
+                    
         list_content_checker=new_game.compar_lenth_of_list_to_secret(the_word,display)
         if list_content_checker==True:
             stopping_conditions=False
