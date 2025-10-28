@@ -1,33 +1,61 @@
-from words import choose_secret_word
-from new_game import letter_Checkir
-from new_game import secret_word_list
-from new_game import The_comparar
-from new_game import compar_len
-from myio import prompt_guess
-word = choose_secret_word()
-counter=0
-game_allower=False
-while game_allower is False:
-    def game_init():
-        letters_already_guesst=[]
-        secret_letters=[]
-        letter=prompt_guess()
-        lc=letter_Checkir(letter,letters_already_guesst)
-        if lc==True:
-            print("already in list")
-            counter+=1
+import words
+import new_game
+import myio
+
+word = words.choose_secret_word(["נמר"])
+display=words.creates_a_list_of_underscores(word)
+# display_list=[]
+display_list=[]
+display_list.append(display)
+print(display_list)
+# letters_already_guesst=[]
+round_limit=int(input("enter a limit"))
+
+
+def game_init(the_word=word,the_guess=display_list,limit=round_limit,counter=0,letters_already_guesst=[]):
+   
+    mistakes_counter=0
+    stopping_conditions=True
+    if counter>=limit:
+        stopping_conditions=False
+    while stopping_conditions is True:
+        
+        letter=myio.prompt_guess()
+        counter+=1
+        print(counter)
+        is_str=myio.is_it_a_str(letter)
+        if is_str==False:
+            print("not good")
+            # letter=myio.prompt_guess()
+        elif  is_str==True:
+            has_been_given=new_game.letter_checkir(letter,letters_already_guesst)    
+               
+            if has_been_given==True:
+                    print("already in list")
+                    continue
+                
+            else:
+                letters_already_guesst.append(letter)
+                letter_within_a_word=new_game.The_comparar(letter,the_word)
+                if letter_within_a_word==False:
+                    print("You are wrong")
+                    mistakes_counter+=1
+                    continue
+                elif letter_within_a_word==True:
+                    print("good guess")
+                    the_guess.append(letter)
+                    
+        list_content_checker=new_game.compar_lenth_of_list_to_secret(the_word,display)
+        if list_content_checker==True:
+            stopping_conditions=False
+            print("You won")
         else:
-            letters_already_guesst.append(letter)
-            counter+=1
-            tc=The_comparar(letter,word)
-            if tc==False:
-                print("You are wrong")
-            elif tc==True:
-                print("good guess")
-                secret_letters.append(letter)
-        swl=secret_word_list()
-        compar_len(word,secret_letters)
-                        
+            stopping_conditions=True
+    print(mistakes_counter)
+    print(the_guess)
+    print("game over")
+game_init()
+            
 
 
 
