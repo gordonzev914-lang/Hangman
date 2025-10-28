@@ -1,12 +1,11 @@
-import words
-import myio
-import main
-secret_dict={}
-secret_dict["secret"]
-Letters_already_guesst=[]
-secret_letters=[]
-def letter_Checkir(ch):
-    if ch in Letters_already_guesst:
+
+
+
+
+
+
+def letter_checkir(ch,old_guess):
+    if ch in old_guess:
         return True
     else:    
         
@@ -18,26 +17,27 @@ def letter_Checkir(ch):
 
 
 def The_comparar(letter,word):
+    
     if letter in list(word):
+        
         
         return True
     else:
         return False
 # print(The_comparator("s","dsa"))
 
-def secret_word_list():
-    return secret_letters
 
-print(secret_word_list())
 
-def compar_len(word,secret_letters):
-    if len(word)==len(secret_letters):
-        return True
+
+
+def compar_lenth_of_list_to_secret(secret,the_list):
+        if  len(secret)==len(the_list):
+            return True
+        else:
+            return False
         
 
-def counter_monitor(c,m):
-    if c>=m:
-        return main.game_allower is True
+
 
 
 
