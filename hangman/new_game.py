@@ -30,8 +30,11 @@ def The_comparar(letter,word):
 
 
 
-def compar_lenth_of_list_to_secret(secret,the_list):
-        if  len(secret)==len(the_list):
+def compar_lenth_of_list_to_secret(secret_word,the_list):
+
+        print("length the word")
+        print(len(secret_word))
+        if  len(secret_word)+1==len(the_list):
             return True
         else:
             return False
